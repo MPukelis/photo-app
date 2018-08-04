@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Base</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body onload="init();">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <ul class="nav navbar-nav">
+
+          {# Django Home Link / Admin Link / Register Link#}
+          <li><a class="navbar-link" href="{% url 'index' %}">Home</a></li>
+          <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+          <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
+
+          {# Some logic on what to display for last item#}
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a class="navbar-link" href="{% url 'basic_app:user_login' %}">Login</a></li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+    {% block body_block %}
+    {% endblock %}
+    </div>
+
+    <script>
+      //--------------------
+      // GET USER MEDIA CODE
+      //--------------------
+      document.getElementById("id_profile_pic").onchange = function() {
+    document.getElementById("form").submit();
+};
+          navigator.getUserMedia = ( navigator.getUserMedia ||
+                             navigator.webkitGetUserMedia ||
+                             navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia);
+
+                           var video;
+                           var webcamStream;
+
+                           function startWebcam() {
+                             if (navigator.getUserMedia) {
+                                navigator.getUserMedia (
+
+                                   // constraints
+                                   {
+                                      video: true,
+                                      audio: false
+                                   },
+
+                                   // successCallback
+                                   function(localMediaStream) {
+                                       video = document.querySelector('video');
+                                      video.src = window.URL.createObjectURL(localMediaStream);
+                                      webcamStream = localMediaStream;
+                                   },
+
+                                   // errorCallback
+                                   function(err) {
+                                      console.log("The following error occured: " + err);
+                                   }
+                                );
+                             } else {
+                                console.log("getUserMedia not supported");
+                             }
+                           }
+
+                           function stopWebcam() {
+                               webcamStream.stop();
+                               document.getElementById('canvasImg').style.display = "inline";
+                           }
+                           //---------------------
+                           // TAKE A SNAPSHOT CODE
+                           //---------------------
+                           var canvas, ctx;
+
+                           function init() {
+                             // Get the canvas and obtain a context for
+                             // drawing in it
+                             canvas = document.getElementById("myCanvas");
+                             ctx = canvas.getContext('2d');
+                           }
+
+                           function snapshot() {
+                              // Draws current image from the video element into the canvas
+                             ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+                             var dataURL = canvas.toDataURL('image/jpeg');
+                             //canvas.style.display="none";document.getElementById('canvasImg').style.display = "none";
+                             //document.getElementById('canvasImg').style.display = "none";
+                             document.getElementById('id_profile_pic').formaction = "fggfhgf";
+
+
+                           }
+
+                       </script>
+
+  </body>
+</html>

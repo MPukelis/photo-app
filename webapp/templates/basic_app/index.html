@@ -1,0 +1,38 @@
+{% extends "basic_app/base.html" %}
+{% block body_block %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Retro Camera App</h1>
+    {% if user.is_authenticated %}
+        <h2 >Welcome {{ user.username }} 24 images left !(value is static for now)</h2>
+
+        <form enctype="multipart/form-data" method="POST" id="form">
+          {% csrf_token %}
+
+          <label for="id_profile_pic" class="btn btn-primary">Capture Image</label>
+          {{ profile_form.as_p }}
+          <!-- <input type="submit" name="" value="Upload" class="btn btn-success"> -->
+        </form>
+      </div>
+<!-- <p>
+<button onclick="startWebcam();">Start WebCam</button>
+<button onclick="stopWebcam();">Stop WebCam</button>
+<button onclick="snapshot();">Take Snapshot</button>
+</p>
+
+<video onclick="snapshot(this);" width=0 height=0 id="video" controls autoplay></video>
+<p> -->
+
+<!-- Screenshots : <p> -->
+  <!-- <canvas  id="myCanvas" width="400" height="600" ></canvas>
+  <img id="canvasImg" alt="save" /> -->
+    {% else %}
+        <h2>Welcome to the site! <li><a  href="{% url 'basic_app:register' %}">Register</a></li> or
+        <li><a href="{% url 'basic_app:user_login' %}">Login</a></li></h2>
+    {% endif %}
+  </div>
+</div>
+
+
+{% endblock %}
