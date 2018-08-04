@@ -28,7 +28,7 @@ SECRET_KEY = 'q2lra#ddiscy17p3t-&^m1+ic#xba!6zkyfe-&*d#+vh!%q*ev'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.7']
+ALLOWED_HOSTS = ['webphoto.pythonanywhere.com']
 
 
 # Application definition
