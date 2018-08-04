@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from basic_app.models import UserProfileInfo
+from basic_app.models import UserProfileInfo,UserPictureCount
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -22,3 +22,9 @@ class UserProfileInfoForm(forms.ModelForm):
             'profile_pic': forms.FileInput(attrs={'capture': 'camera','accept':'image/*','style':'visibility:hidden;'},),
 
         }
+
+class UserPictureCountForm(forms.ModelForm):
+    #profile_pic = forms.FileInput(label='')
+    class Meta():
+        model = UserPictureCount
+        fields = ('picture_count',)

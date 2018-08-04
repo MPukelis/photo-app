@@ -5,7 +5,9 @@
   <div class="jumbotron">
     <h1>Retro Camera App</h1>
     {% if user.is_authenticated %}
-        <h2 >Welcome {{ user.username }} 24 images left !(value is static for now)</h2>
+        <h2 >Welcome {{ user.username }}!</h2>
+        <h3> you have {{pic_count}} images left !</h3>
+        <h3> {{top_up}}</h3>
 
         <form enctype="multipart/form-data" method="POST" id="form">
           {% csrf_token %}

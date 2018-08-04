@@ -15,13 +15,15 @@
           {# Django Home Link / Admin Link / Register Link#}
           <li><a class="navbar-link" href="{% url 'index' %}">Home</a></li>
           <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
-          <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
+
+
 
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
             <li><a class="navbar-link" href="{% url 'basic_app:user_login' %}">Login</a></li>
+            <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
           {% endif %}
 
         </ul>
@@ -101,7 +103,14 @@
 
                            }
 
-                       </script>
 
+                       </script>
+                       <script type="text/javascript">
+                       var a = "{{pic_count}}";
+                       if (a == "0")
+                       {
+                         document.getElementById("id_profile_pic").disabled = true;
+                       }
+                      </script>
   </body>
 </html>

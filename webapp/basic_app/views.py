@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from basic_app.forms import UserForm,UserProfileInfoForm
+from basic_app.forms import UserForm,UserProfileInfoForm,UserPictureCountForm
+from basic_app.models import UserPictureCount
 
 
 
@@ -11,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
-
+    count="Failed"
     if request.method == 'POST':
         profile_form = UserProfileInfoForm(data=request.POST)
         print('first if')
@@ -27,12 +28,28 @@ def index(request):
         # UserForm and UserProfileInfoForm
             profile.user = request.user
 
+
+            pc = UserPictureCount.objects.get(user = request.user)
+            count = str(pc.picture_count)
+
+
         # Check if they provided a profile picture
             if 'profile_pic' in request.FILES:
                 print('found it')
 
-            # If yes, then grab it from the POST form reply
+                pc.picture_count -=1
+                pc.save()
+            # If yes, then grab import osit from the POST form reply
                 profile.profile_pic = request.FILES['profile_pic']
+                f = request.FILES['profile_pic']
+                # for chunk in f.chunks():
+                #     path = 'media/'+request.user.username+'/file.png'
+                #     if not os.path.exists(path):
+                #         os.makedirs(path)
+                #     fw=open(path,'wb')
+                #     fw.write(chunk)
+                #     fw.close()
+
 
         # Now save model
                 profile.save()
@@ -46,13 +63,23 @@ def index(request):
 
     else:
     # Was not an HTTP post so we just render the forms as blank.
-
         profile_form = UserProfileInfoForm()
+        outofsnaps =""
+        if request.user.id:
+            pc = UserPictureCount.objects.get(user_id = request.user.id)
+            count = str(pc.picture_count)
+
+
+            if pc.picture_count == 0:
+                outofsnaps ="Out of Film :("
 
 # This is the render and context dictionary to feed
 # back to the registration.html file page.
+
     return render(request,'basic_app/index.html',{
     'profile_form':profile_form,
+    "pic_count": count,
+    "top_up":outofsnaps
     })
 
 
@@ -79,6 +106,8 @@ def register(request):
         # Get info from "both" forms
         # It appears as one form to the user on the .html page
         user_form = UserForm(data=request.POST)
+
+
         #profile_form = UserProfileInfoForm(data=request.POST)
 
         # Check to see both forms are valid
@@ -87,9 +116,13 @@ def register(request):
 
             # Save User Form to Database
             user = user_form.save()
+            pic_count = UserPictureCount(user = user)
+            pic_count.save()
 
             # Hash the password
             user.set_password(user.password)
+
+
 
             # Update with Hashed password
             user.save()
