@@ -66,12 +66,19 @@ def index(request):
         profile_form = UserProfileInfoForm()
         outofsnaps =""
         if request.user.id:
-            pc = UserPictureCount.objects.get(user_id = request.user.id)
-            count = str(pc.picture_count)
-
-
-            if pc.picture_count == 0:
+            try:
+                pc = UserPictureCount.objects.get(user_id = request.user.id)
+                count = str(pc.picture_count)
+                if pc.picture_count == 0:
+                    outofsnaps ="Out of Film :("
+            except UserPictureCount.DoesNotExist:
+                count = '0'
                 outofsnaps ="Out of Film :("
+
+
+
+
+
 
 # This is the render and context dictionary to feed
 # back to the registration.html file page.
