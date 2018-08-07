@@ -3,9 +3,11 @@
 
 {% block body_block %}
   <div class="container">
-    <div class="jumbotron">
-        <h1>Upload Successful!</h1>
-        <a class="btn btn-primary" href="{% url 'index' %}">Home</a>
+    <div class="p-4 section-light bg-primary">
+        <h1 class="mb-3 text-center text-secondary">
+          Photo uploaded!
+        </h1>
+        <a class="btn mt-4 btn-block p-2 btn-secondary" href="{% url 'index' %}"><b>Take another photo </b></a>
 
 
     </div>

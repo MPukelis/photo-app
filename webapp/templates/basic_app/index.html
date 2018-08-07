@@ -1,18 +1,24 @@
 {% extends "basic_app/base.html" %}
 {% block body_block %}
 
-<div class="container">
-  <div class="jumbotron">
-    <h1>Retro Camera App</h1>
-    {% if user.is_authenticated %}
-        <h2 >Welcome {{ user.username }}!</h2>
-        <h3> you have {{pic_count}} images left !</h3>
-        <h3> {{top_up}}</h3>
 
+
+
+    {% if user.is_authenticated %}
+        <div class="p-4 section-light bg-primary">
+          <h2 class="mb-3 text-center text-secondary">
+            <a>Hello {{ user.username }}!</a>
+          </h2>
+          <h3 class="mb-3 text-center text-secondary">
+            <a> {{pic_count}} photos remaining</a>
+          </h3>
+          <h5 class="mb-3 text-center text-secondary">
+            <a>{{top_up}}</a>
+          </h5>
         <form enctype="multipart/form-data" method="POST" id="form">
           {% csrf_token %}
 
-          <label for="id_profile_pic" class="btn btn-primary">Capture Image</label>
+          <label for="id_profile_pic" class="btn mt-4 btn-block p-2 btn-secondary" id ="take_photo_btn">Take Photo</label>
           {{ profile_form.as_p }}
           <!-- <input type="submit" name="" value="Upload" class="btn btn-success"> -->
         </form>
@@ -30,8 +36,13 @@
   <!-- <canvas  id="myCanvas" width="400" height="600" ></canvas>
   <img id="canvasImg" alt="save" /> -->
     {% else %}
-        <h2>Welcome to the site! <a class="btn btn-primary" href="{% url 'basic_app:register' %}">Register</a> or
-        <a class="btn btn-primary" href="{% url 'basic_app:user_login' %}">Login</a></h2>
+    <a href="{% url 'basic_app:register' %}" class="btn mt-4 btn-block p-2 btn-secondary">Subscribe</a>
+    <h3 class="mb-3 text-center text-secondary">
+    <a href="{% url 'basic_app:user_login' %}" class="mb-3 text-center text-secondary"> <i>Login</i></a>
+  </h3>
+    <!-- <button  class="btn mt-4 btn-block p-2 btn-secondary" href="{% url 'basic_app:register' %}">
+      <b>Subscribe</b>
+    </button> -->
     {% endif %}
   </div>
 </div>

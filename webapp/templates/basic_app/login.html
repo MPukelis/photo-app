@@ -1,19 +1,25 @@
 {% extends 'basic_app/base.html' %}
 {% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Please Login</h1>
+  <div class="p-4 section-light bg-primary">
+    <div >
+      <h1 class="mb-3 text-center text-secondary">Please Login</h1>
 
         <form method="post" action="{% url 'basic_app:user_login' %}">
           {% csrf_token %}
           {# A more "HTML" way of creating the login form#}
-          <label for="username">Username:</label>
+          <div class="form-group">
+          <label class="text-secondary" for="username">Username:</label>
           <input type="text" name="username" placeholder="Username">
+          </div>
 
-          <label for="password"></label>
+          <div class="form-group">
+          <label class="text-secondary" for="password">Password</label>
           <input type="password" name="password">
+          </div>
+          <button type="submit" name="" value="Login" class="btn mt-4 btn-block p-2 btn-secondary">
+            <b>Login</b>
+          </button>
 
-          <input type="submit" name="" value="Login">
 
         </form>
 

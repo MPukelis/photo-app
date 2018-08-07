@@ -11,6 +11,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def restaurant(request):
+    return render(request, 'basic_app/restaurant.html')
+
 def index(request):
     count="Failed"
     if request.method == 'POST':
@@ -70,10 +73,10 @@ def index(request):
                 pc = UserPictureCount.objects.get(user_id = request.user.id)
                 count = str(pc.picture_count)
                 if pc.picture_count == 0:
-                    outofsnaps ="Out of Film :("
+                    outofsnaps ="REWIND<< are printing your photos!"
             except UserPictureCount.DoesNotExist:
                 count = '0'
-                outofsnaps ="Out of Film :("
+                outofsnaps ="Invalid user"
 
 
 
