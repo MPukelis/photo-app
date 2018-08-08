@@ -7,7 +7,9 @@
     {% if user.is_authenticated %}
         <div class="p-4 section-light bg-primary">
           <h2 class="mb-3 text-center text-secondary">
+              {%if pic_count != "0" %}
             <a>Hello {{ user.username }}!</a>
+            {%endif%}
           </h2>
           <h3 class="mb-3 text-center text-secondary">
             <a> {{pic_count}} photos remaining</a>
@@ -36,7 +38,7 @@
   <!-- <canvas  id="myCanvas" width="400" height="600" ></canvas>
   <img id="canvasImg" alt="save" /> -->
     {% else %}
-    <a href="{% url 'basic_app:register' %}" class="btn mt-4 btn-block p-2 btn-secondary">Subscribe</a>
+    <a href="{% url 'basic_app:register' %}" class="btn mt-4 btn-block p-2 btn-secondary">Register</a>
     <h3 class="mb-3 text-center text-secondary">
     <a href="{% url 'basic_app:user_login' %}" class="mb-3 text-center text-secondary"> <i>Login</i></a>
   </h3>

@@ -42,6 +42,8 @@ def index(request):
 
                 pc.picture_count -=1
                 pc.save()
+
+
             # If yes, then grab import osit from the POST form reply
                 profile.profile_pic = request.FILES['profile_pic']
                 f = request.FILES['profile_pic']
@@ -56,8 +58,20 @@ def index(request):
 
         # Now save model
                 profile.save()
+                if (pc.picture_count > 0):
+                    return render(request,'basic_app/success.html')
+                else:
+                    profile_form = UserProfileInfoForm()
+                    outofsnaps =""
+                    count = '0'
+                    outofsnaps ="REWIND<< are printing your photos!"
+                    return render(request,'basic_app/index.html',{
+    'profile_form':profile_form,
+    "pic_count": count,
+    "top_up":outofsnaps
+    })
 
-                return render(request,'basic_app/success.html')
+
         else:
              print('invalid image')
              profile_form = UserProfileInfoForm()
@@ -74,6 +88,7 @@ def index(request):
                 count = str(pc.picture_count)
                 if pc.picture_count == 0:
                     outofsnaps ="REWIND<< are printing your photos!"
+
             except UserPictureCount.DoesNotExist:
                 count = '0'
                 outofsnaps ="Invalid user"
