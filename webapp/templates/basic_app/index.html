@@ -20,9 +20,13 @@
         <form enctype="multipart/form-data" method="POST" id="form">
           {% csrf_token %}
 
-          <label for="id_profile_pic" class="btn mt-4 btn-block p-2 btn-secondary" id ="take_photo_btn">Take Photo</label>
+          <label for="id_profile_pic" class="btn mt-4 btn-block p-2 btn-secondary" id ="take_photo_btn">
+            <i class="" id = "id_loader"></i>Take Photo
+          </label>
+
           {{ profile_form.as_p }}
           <!-- <input type="submit" name="" value="Upload" class="btn btn-success"> -->
+
         </form>
       </div>
 <!-- <p>

@@ -11,8 +11,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def restaurant(request):
-    return render(request, 'basic_app/restaurant.html')
+def thank_you(request):
+    return render(request, 'basic_app/thank_you.html')
 
 def index(request):
     count="Failed"

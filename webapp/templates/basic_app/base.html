@@ -16,6 +16,24 @@
   <script src={% static  "js/navbar-ontop.js" %}></script>
   <!-- Script: Animated entrance -->
   <script src={% static  "js/animate-in.js" %}></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.buttonload {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 24px; /* Some padding */
+    font-size: 16px; /* Set a font-size */
+}
+
+/* Add a right margin to each icon */
+.fa {
+    margin-left: -12px;
+    margin-right: 8px;
+}
+</style>
 </head>
 
 <nav class="navbar navbar-expand-md bg-primary navbar-light fixed-top">
@@ -83,10 +101,15 @@
       //--------------------
       // GET USER MEDIA CODE
       //--------------------
-      document.getElementById("id_profile_pic").onchange = function() {
+    document.getElementById("id_profile_pic").onchange = function() {
     document.getElementById("form").submit();
     document.getElementById('take_photo_btn').disabled = true;
     document.getElementById("id_profile_pic").disabled = true;
+    document.getElementById("id_loader").classList.add('fa');
+    document.getElementById("id_loader").classList.add('fa-circle-o-notch');
+    document.getElementById("id_loader").classList.add('fa-spin');
+
+
 };
                        </script>
                        <script type="text/javascript">
@@ -95,6 +118,8 @@
                        {
                          document.getElementById("id_profile_pic").disabled = true;
                          document.getElementById("take_photo_btn").innerHTML = "Buy another roll";
+                         document.getElementById("take_photo_btn").onclick = location.href = "{% url 'basic_app:thank_you' %}";
+
                        }
                       </script>
                       <script src="https://code.jquery.com/jquery-3.2.1.js"></script>

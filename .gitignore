@@ -1,3 +1,5 @@
 webapp/media
 *.sqlite3
 webapp/basic_app/migrations
+webapp/__pycache__
+basic_app/__pycache__
