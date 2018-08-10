@@ -21,7 +21,6 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^$',views.index,name='index'),
-    url(r'^restaurant',views.restaurant,name='restaurant'),
     url(r'^special/',views.special,name='special'),
     url(r'^admin/', admin.site.urls),
     url(r'^basic_app/',include('basic_app.urls')),
