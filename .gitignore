@@ -1,1 +1,3 @@
 webapp/media
+*.sqlite3
+webapp/basic_app/migrations
